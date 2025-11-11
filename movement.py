@@ -1,3 +1,10 @@
+def check():
+	if get_ground_type() == Grounds.Grassland:
+		till()
+
+	if get_water() < 0.6:
+		use_item(Items.Water)
+
 def hamilton(start_x, start_y, size_x, size_y):
 	x, y = get_pos_x(), get_pos_y()
 	

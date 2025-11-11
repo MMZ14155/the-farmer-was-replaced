@@ -1,14 +1,14 @@
 import plant
+import superPumpkin
 import cactus
 import explore
-import movement
 	
 def collect_items(thread):
 	repeats = get_world_size() / thread
 	
 	if num_items(Items.Power) < 2 * 10 ** 3:
 		while(num_items(Items.Power) < 5 * 10 ** 3):
-			plant.sunflower(8, 8, 8)
+			plant.sunflower(8, 8, 8, 8)
 	
 	items = [num_items(Items.Hay), num_items(Items.Wood), num_items(Items.Carrot), 
 	num_items(Items.Pumpkin), num_items(Items.Cactus), num_items(Items.Bone), num_items(Items.Gold)]
@@ -17,7 +17,7 @@ def collect_items(thread):
 		if minor > items[i]:
 			minor = items[i]
 			index = i
-	
+
 	if index == 0:
 		plant.grass(0, 0, get_world_size(), get_world_size())
 	elif index == 1:
@@ -25,43 +25,10 @@ def collect_items(thread):
 	elif index == 2:
 		plant.carrot(0, 0, get_world_size(), get_world_size())
 	elif index == 3:
-		plant.pumpkin(0, 0, get_world_size(), get_world_size())
-		
+		# plant.pumpkin(0, 0, get_world_size(), get_world_size())
+		superPumpkin.main(repeats, thread)
 	elif index == 4:
-		movement.to(0, 0)
-		for count in range(0, repeats):
-			for i in range(0, thread):
-				move(North)
-				spawn_drone(cactus.start)
-			
-			cactus.start()
-		
-		while(num_drones() != 1):
-			pass
-	
-		movement.to(0, 0)
-		for count in range(0, repeats):
-			for i in range(0, thread):
-				move(North)
-				spawn_drone(cactus.row)
-			
-			cactus.row()
-			
-		while(num_drones() != 1):
-			pass
-		
-		movement.to(0, 0)
-		for count in range(0, repeats):
-			for i in range(0, thread):
-				move(East)
-				spawn_drone(cactus.column)
-			
-			cactus.column()
-			
-		while(num_drones() != 1):
-			pass
-		
-		harvest()
+		cactus.main(repeats, thread)
 		
 	elif index == 5:
 		explore.snake(get_world_size())

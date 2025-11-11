@@ -1,15 +1,8 @@
 import movement
 
-def check():
-	if get_ground_type() == Grounds.Grassland:
-		till()
-
-	if get_water() < 0.6:
-		use_item(Items.Water)
-
 def start():
 	for i in range(0, get_world_size()):
-		check()
+		movement.check()
 		plant(Entities.Cactus)
 		move(East)
 
@@ -62,3 +55,39 @@ def column():
 		
 		if flag == False:
 			break
+
+def main(repeats, thread):
+	movement.to(0, 0)
+	for count in range(0, repeats):
+		for i in range(0, thread):
+			move(North)
+			spawn_drone(start)
+		
+		start()
+	
+	while(num_drones() != 1):
+		pass
+	
+	movement.to(0, 0)
+	for count in range(0, repeats):
+		for i in range(0, thread):
+			move(North)
+			spawn_drone(row)
+			
+		row()
+			
+	while(num_drones() != 1):
+		pass
+		
+	movement.to(0, 0)
+	for count in range(0, repeats):
+		for i in range(0, thread):
+			move(East)
+			spawn_drone(column)
+		
+		column()
+		
+	while(num_drones() != 1):
+		pass
+	
+	harvest()

@@ -1,25 +1,18 @@
 import movement
 
-def check():
-	if get_ground_type() == Grounds.Grassland:
-		till()
-
-	if get_water() < 0.6:
-		use_item(Items.Water)
-
 def grass(start_x, start_y, size_x, size_y):
 	movement.to(start_x, start_y)
-	check()
+	movement.check()
 	
 	for i in range(0, size_x * size_y):
 		harvest()
 		plant(Entities.Grass)
 		movement.hamilton(start_x, start_y, size_x, size_y)
-		check()
+		movement.check()
 
 def tree(start_x, start_y, size_x, size_y):
 	movement.to(start_x, start_y)
-	check()
+	movement.check()
 	
 	for i in range(0, size_x * size_y):
 		if (can_harvest() == False) and (get_entity_type() == Entities.Tree):
@@ -30,21 +23,21 @@ def tree(start_x, start_y, size_x, size_y):
 		else:
 			plant(Entities.Bush)
 		movement.hamilton(start_x, start_y, size_x, size_y)
-		check()
+		movement.check()
 
 def carrot(start_x, start_y, size_x, size_y):
 	movement.to(start_x, start_y)
-	check()
+	movement.check()
 	
 	for i in range(0, size_x * size_y):
 		harvest()
 		plant(Entities.Carrot)
 		movement.hamilton(start_x, start_y, size_x, size_y)
-		check()
+		movement.check()
 
 def pumpkin(start_x, start_y, size_x, size_y):
 	movement.to(start_x, start_y)
-	check()
+	movement.check()
 	dead_pumpkins = []
 	
 	for i in range(0, size_x * size_y):
@@ -52,14 +45,14 @@ def pumpkin(start_x, start_y, size_x, size_y):
 		position = (get_pos_x(), get_pos_y())
 		dead_pumpkins.append(position)
 		movement.hamilton(start_x, start_y, size_x, size_y)
-		check()
+		movement.check()
 	
 	while(len(dead_pumpkins) != 0):
 		pop_list = []
 		for i in range(0, len(dead_pumpkins)):
 			x, y = dead_pumpkins[i]
 			movement.to(x, y)
-			check()
+			movement.check()
 			if (get_entity_type() == Entities.Pumpkin) and can_harvest():
 				pop_list.append(i)
 			else:
@@ -72,7 +65,7 @@ def pumpkin(start_x, start_y, size_x, size_y):
 
 def sunflower(start_x, start_y, size_x, size_y):
 	movement.to(start_x, start_y)
-	check()
+	movement.check()
 	sequence = []
 	
 	for i in range(0, size_x * size_y):
@@ -80,7 +73,7 @@ def sunflower(start_x, start_y, size_x, size_y):
 		petal_coordinate = (measure(), get_pos_x(), get_pos_y())
 		sequence.append(petal_coordinate)
 		movement.hamilton(start_x, start_y, size_x, size_y)
-		check()
+		movement.check()
 		
 	while(len(sequence) != 0):
 		max_petal = 0
@@ -90,7 +83,7 @@ def sunflower(start_x, start_y, size_x, size_y):
 				max_petal, pop_i = petal, i
 				target_x, target_y = x, y
 		movement.to(target_x, target_y)
-		check()
+		movement.check()
 		sequence.pop(pop_i)
 		if can_harvest() == False:
 			use_item(Items.Fertilizer)
