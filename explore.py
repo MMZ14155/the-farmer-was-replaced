@@ -14,7 +14,7 @@ def maze(start_x, start_y, size, rounds=1):
 	if entity_type != Entities.Hedge and entity_type != Entities.Treasure and measure() == None:
 		plant(Entities.Bush)
 		while(can_harvest() == False):
-			pass
+			use_item(Items.Fertilizer)
 		use_item(Items.Weird_Substance, substance)
 	
 	directions = [North, East, South, West]
@@ -39,13 +39,13 @@ def maze(start_x, start_y, size, rounds=1):
 	
 	return 0
 
-def snake():
+def snake(size):
 	clear()
 	movement.to(0, 0)
 	change_hat(Hats.Dinosaur_Hat)
 	flag = 1
 	
 	while(flag == 1):
-		flag = movement.hamilton(0, 0, size)
+		flag = movement.hamilton(0, 0, size, size)
 	
 	change_hat(Hats.Straw_Hat)

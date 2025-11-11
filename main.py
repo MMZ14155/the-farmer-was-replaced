@@ -1,4 +1,4 @@
 import task
 
 while(1):
-	task.collect_items()
+	task.collect_items(32)
