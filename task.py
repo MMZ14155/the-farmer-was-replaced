@@ -15,11 +15,15 @@ def collect_items():
 			minor = items[i]
 			index = i
 	
-	if index == 0 or index == 2:
-		plant.default(0, 0, get_world_size())
+	if index == 0:
+		plant.grass(0, 0, get_world_size())
 		clear()
 	elif index == 1:
 		plant.tree(0, 0, get_world_size())
+		clear()
+	elif index == 2:
+		plant.carrot(0, 0, get_world_size())
+		clear()
 	elif index == 3:
 		plant.pumpkin(0, 0, get_world_size())
 	elif index == 4:

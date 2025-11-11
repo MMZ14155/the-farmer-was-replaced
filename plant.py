@@ -12,25 +12,15 @@ def check():
 	if get_water() < 0.6:
 		use_item(Items.Water)
 
-def default(start_x, start_y, size):
+def grass(start_x, start_y, size):
 	movement.to(start_x, start_y)
+	check()
 	
 	for i in range(0, size ** 2):
-		check()
-		if can_harvest():
-			harvest()
-	
-		x, y = get_pos_x(), get_pos_y()
-
-		if (x + y) % 2 == 1:
-			if (x + y) % 4 == 3:
-				plant(Entities.Tree)
-			else:
-				plant(Entities.Carrot)
-		else:
-			plant(Entities.Grass)
-	
+		harvest()
+		plant(Entities.Grass)
 		movement.hamilton(start_x, start_y, size)
+		check()
 
 def tree(start_x, start_y, size):
 	movement.to(start_x, start_y)
@@ -44,6 +34,16 @@ def tree(start_x, start_y, size):
 			plant(Entities.Tree)
 		else:
 			plant(Entities.Bush)
+		movement.hamilton(start_x, start_y, size)
+		check()
+
+def carrot(start_x, start_y, size):
+	movement.to(start_x, start_y)
+	check()
+	
+	for i in range(0, size ** 2):
+		harvest()
+		plant(Entities.Carrot)
 		movement.hamilton(start_x, start_y, size)
 		check()
 
