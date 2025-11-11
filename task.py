@@ -2,8 +2,6 @@ import plant
 import explore	
 	
 def collect_items():
-	clear()
-
 	if num_items(Items.Power) < 2 * 10 ** 3:
 		while(num_items(Items.Power) < 5 * 10 ** 3):
 			plant.sunflower(8, 8, 8)
@@ -17,13 +15,10 @@ def collect_items():
 	
 	if index == 0:
 		plant.grass(0, 0, get_world_size())
-		clear()
 	elif index == 1:
 		plant.tree(0, 0, get_world_size())
-		clear()
 	elif index == 2:
 		plant.carrot(0, 0, get_world_size())
-		clear()
 	elif index == 3:
 		plant.pumpkin(0, 0, get_world_size())
 	elif index == 4:

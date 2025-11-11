@@ -1,6 +1,7 @@
 import movement
 
 def maze(start_x, start_y, size, rounds=1):
+	clear()
 	center_x = start_x + size // 2
 	center_y = start_y + size // 2
 	movement.to(center_x, center_y)
@@ -39,6 +40,7 @@ def maze(start_x, start_y, size, rounds=1):
 	return 0
 
 def snake():
+	clear()
 	movement.to(0, 0)
 	change_hat(Hats.Dinosaur_Hat)
 	flag = 1
