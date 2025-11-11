@@ -109,22 +109,56 @@ def cactus(start_x, start_y, size):
 		plant(Entities.Cactus)
 		movement.hamilton(start_x, start_y, size)
 		check()
-	
+
 	for row in range(0, size):
 		row_y = start_y + row
-		for i in range(0, size):
-			for j in range(size - 1, i, -1):
+		left = 0
+		right = size - 1
+		
+		while left < right:
+			flag = False
+			
+			for j in range(left, right):
+				movement.to(start_x + j, row_y)
+				if measure() > measure(East):
+					swap(East)
+					flag = True
+			right -= 1
+	
+			for j in range(right, left, -1):
 				movement.to(start_x + j, row_y)
 				if measure(West) > measure():
 					swap(West)
+					flag = True
+			left += 1
+			
+			if flag == False:
+				break
 	
 	for column in range(0, size):
 		column_x = start_x + column
-		for i in range(0, size):
-			for j in range(size - 1, i, -1):
+		top = 0
+		bottom = size - 1
+		
+		while top < bottom:
+			flag = False
+			
+			for j in range(top, bottom):
+				movement.to(column_x, start_y + j)
+				if measure() > measure(North):
+					swap(North)
+					flag = True
+			bottom -= 1
+			
+			for j in range(bottom, top, -1):
 				movement.to(column_x, start_y + j)
 				if measure(South) > measure():
 					swap(South)
+					flag = True
+			top += 1
+			
+			if flag == False:
+				break
 	
 	harvest()
 
